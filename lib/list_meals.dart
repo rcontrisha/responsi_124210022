@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsi_124210022/detail_meals.dart';
 import 'Models/meal.dart';
 import 'data_source.dart';
 
@@ -33,25 +34,30 @@ class _ListMealsState extends State<ListMeals> {
                 itemCount: meal.meals?.length,
                 itemBuilder: (context, int index) {
                   final Meals? meals = meal.meals?[index];
-                  return Card(
-                    child: SizedBox(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Image.network(
-                                '${meals?.strMealThumb}',
-                                height: 165,
-                                width: 150,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailMeals(idMeals: '${meals?.idMeal}')));
+                    },
+                    child: Card(
+                      child: SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Image.network(
+                                  '${meals?.strMealThumb}',
+                                  height: 160,
+                                  width: 150,
+                              ),
                             ),
-                          ),
-                          Text(
-                              '${meals?.strMeal}',
-                              textAlign: TextAlign.center,
-                          )
-                        ],
+                            Text(
+                                '${meals?.strMeal}',
+                                textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );
